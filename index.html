@@ -102,33 +102,66 @@ nav a:hover { color: var(--ink); background: var(--border); }
   gap: 24px;
   flex-wrap: wrap;
 }
- 
-/* ─── AVATAR — bold rectangular frame ───────────────────────── */
-.avatar-frame {
+ /* ─── PROFILE HIGHLIGHT ─────────────────────────────────────── */
+.hero-profile-container {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   flex-shrink: 0;
-  width: 88px;
-  height: 88px;
-  border-radius: 10px;
+}
+.hero-profile-motion-wrapper {
+  width: 96px;
+  height: 96px;
+  border-radius: 14px;
   border: 3px solid var(--accent);
-  /* hard offset drop-shadow in accent colour = bold framed look */
   box-shadow:
-    5px 5px 0 var(--accent),
-    0 0 0 5px var(--accent-bg);
+    6px 6px 0 var(--accent),
+    0 0 0 6px var(--accent-bg);
   overflow: hidden;
   background: var(--accent-bg);
-  transition: box-shadow var(--transition), transform var(--transition);
+  transform-origin: center;
+  transition: transform var(--transition), box-shadow var(--transition);
+  position: relative;
 }
-.avatar-frame:hover {
-  transform: translate(-2px, -2px);
+.hero-profile-container:hover .hero-profile-motion-wrapper {
+  transform: translate(-2px, -2px) scale(1.03);
   box-shadow:
-    7px 7px 0 var(--accent),
-    0 0 0 5px var(--accent-bg);
+    8px 8px 0 var(--accent),
+    0 0 0 6px var(--accent-bg);
 }
-.avatar-frame img {
+.hero-profile-image {
   width: 100%;
   height: 100%;
   object-fit: cover;
   display: block;
+}
+.hero-profile-glow {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 20% 20%, rgba(255,255,255,0.4), rgba(255,255,255,0) 50%);
+  pointer-events: none;
+}
+.hero-crown {
+  position: absolute;
+  top: -14px;
+  right: -10px;
+  font-size: 1.35rem;
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.15));
+  animation: crown-bob 2.2s ease-in-out infinite;
+}
+@keyframes crown-bob {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-3px); }
+}
+/* ─── AVATAR — bold rectangular frame ───────────────────────── */
+<div class="hero-profile-container">
+  <div class="hero-profile-motion-wrapper">
+    <img src="profile.jpg" alt="Navilan K - Profile" class="hero-profile-image" loading="lazy" onerror="this.style.display='none'">
+    <div class="hero-profile-glow"></div>
+  </div>
+  <div class="hero-crown">👑</div>
+</div>
 }
 /* ──────────────────────────────────────────────────────────── */
  
