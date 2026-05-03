@@ -586,7 +586,11 @@ document.getElementById("contact-link").href             = "mailto:" + DATA.cont
 DATA.skills.forEach(s => {
   const d = document.createElement("div");
   d.className = "skill-tile";
-  d.innerHTML = `<div class="skill-icon">${s.icon}</div><span class="skill-name">${s.name}</span>`;
+  const isImage = s.icon.match(/\.(png|jpg|jpeg|webp|svg|gif)/i) || s.icon.startsWith("http");
+  const iconHTML = isImage
+    ? `<img src="${s.icon}" alt="${s.name}" style="width:100%;height:100%;object-fit:cover;border-radius:10px;">`
+    : s.icon;
+  d.innerHTML = `<div class="skill-icon">${iconHTML}</div><span class="skill-name">${s.name}</span>`;
   document.getElementById("skills-list").appendChild(d);
 });
  
