@@ -29,7 +29,7 @@
   --font-disp:  'DM Serif Display', Georgia, serif;
   --transition: 0.2s cubic-bezier(0.4,0,0.2,1);
 }
- 
+
 /* ─── RESET ──────────────────────────────────────────────────── */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 html { scroll-behavior: smooth; font-size: 16px; }
@@ -42,7 +42,7 @@ body {
 }
 img { display: block; max-width: 100%; }
 a { color: inherit; text-decoration: none; }
- 
+
 /* ─── HEADER ─────────────────────────────────────────────────── */
 header {
   position: fixed;
@@ -74,7 +74,7 @@ nav a {
   transition: color var(--transition), background var(--transition);
 }
 nav a:hover { color: var(--ink); background: var(--border); }
- 
+
 /* ─── HERO ───────────────────────────────────────────────────── */
 .hero {
   min-height: 100vh;
@@ -102,36 +102,15 @@ nav a:hover { color: var(--ink); background: var(--border); }
   gap: 24px;
   flex-wrap: wrap;
 }
- 
-/* ─── AVATAR — bold rectangular frame ───────────────────────── */
-.avatar-frame {
-  flex-shrink: 0;
-  width: 88px;
-  height: 88px;
-  border-radius: 10px;
-  border: 3px solid var(--accent);
-  /* hard offset drop-shadow in accent colour = bold framed look */
-  box-shadow:
-    5px 5px 0 var(--accent),
-    0 0 0 5px var(--accent-bg);
-  overflow: hidden;
-  background: var(--accent-bg);
-  transition: box-shadow var(--transition), transform var(--transition);
-}
-.avatar-frame:hover {
-  transform: translate(-2px, -2px);
-  box-shadow:
-    7px 7px 0 var(--accent),
-    0 0 0 5px var(--accent-bg);
-}
-.avatar-frame img {
-  width: 100%;
-  height: 100%;
+.avatar {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  border: 2px solid var(--border-md);
   object-fit: cover;
-  display: block;
+  flex-shrink: 0;
+  box-shadow: var(--shadow-sm);
 }
-/* ──────────────────────────────────────────────────────────── */
- 
 .hero-text { flex: 1; min-width: 200px; }
 .hero-label {
   display: inline-flex;
@@ -195,7 +174,7 @@ nav a:hover { color: var(--ink); background: var(--border); }
   border-color: var(--ink);
 }
 .btn-primary:hover { background: #333; box-shadow: 0 4px 12px rgba(0,0,0,0.18); }
- 
+
 /* ─── LAYOUT ─────────────────────────────────────────────────── */
 section {
   max-width: 860px;
@@ -203,7 +182,7 @@ section {
   padding: 72px clamp(1rem, 5vw, 3rem);
 }
 section + section { padding-top: 0; }
- 
+
 /* ─── SECTION LABEL ──────────────────────────────────────────── */
 .s-label {
   font-size: 0.7rem;
@@ -221,7 +200,7 @@ section + section { padding-top: 0; }
   letter-spacing: -0.02em;
   margin-bottom: 32px;
 }
- 
+
 /* ─── ABOUT ──────────────────────────────────────────────────── */
 .about-strip {
   display: grid;
@@ -251,7 +230,7 @@ section + section { padding-top: 0; }
   color: var(--accent);
   line-height: 1;
 }
- 
+
 /* ─── SKILLS ─────────────────────────────────────────────────── */
 .skills-grid {
   display: grid;
@@ -282,6 +261,12 @@ section + section { padding-top: 0; }
   border-radius: 10px;
   display: flex; align-items: center; justify-content: center;
   font-size: 1.25rem;
+  overflow: hidden;
+}
+.skill-icon img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  border-radius: 10px;
 }
 .skill-name {
   font-size: 0.8125rem;
@@ -290,7 +275,7 @@ section + section { padding-top: 0; }
   text-transform: uppercase;
   letter-spacing: 0.06em;
 }
- 
+
 /* ─── ACHIEVEMENTS ───────────────────────────────────────────── */
 .ach-list { display: flex; flex-direction: column; gap: 10px; }
 .ach-item {
@@ -321,7 +306,7 @@ section + section { padding-top: 0; }
   line-height: 1.6;
   padding-top: 3px;
 }
- 
+
 /* ─── CERTIFICATES ───────────────────────────────────────────── */
 .cert-grid {
   display: grid;
@@ -350,7 +335,7 @@ section + section { padding-top: 0; }
 }
 .cert-thumb:hover .cert-overlay { opacity: 1; }
 .cert-overlay-icon { color: white; font-size: 1.4rem; }
- 
+
 /* ─── LIGHTBOX ───────────────────────────────────────────────── */
 .lightbox {
   display: none;
@@ -382,7 +367,7 @@ section + section { padding-top: 0; }
   transition: background var(--transition);
 }
 .lightbox-close:hover { background: rgba(255,255,255,0.22); }
- 
+
 /* ─── CONTACT ────────────────────────────────────────────────── */
 .contact-card {
   background: var(--surface);
@@ -414,7 +399,7 @@ section + section { padding-top: 0; }
   box-shadow: 0 8px 24px rgba(0,0,0,0.2);
   transform: translateY(-2px);
 }
- 
+
 /* ─── FOOTER ─────────────────────────────────────────────────── */
 footer {
   text-align: center;
@@ -424,7 +409,7 @@ footer {
   color: var(--ink-3);
 }
 footer strong { color: var(--ink); font-weight: 500; }
- 
+
 /* ─── SCROLL REVEAL ──────────────────────────────────────────── */
 .reveal {
   opacity: 0;
@@ -432,7 +417,7 @@ footer strong { color: var(--ink); font-weight: 500; }
   transition: opacity 0.55s cubic-bezier(0.4,0,0.2,1), transform 0.55s cubic-bezier(0.4,0,0.2,1);
 }
 .reveal.visible { opacity: 1; transform: none; }
- 
+
 /* ─── RESPONSIVE ─────────────────────────────────────────────── */
 @media (max-width: 640px) {
   nav a { display: none; }
@@ -443,7 +428,7 @@ footer strong { color: var(--ink); font-weight: 500; }
 </style>
 </head>
 <body>
- 
+
 <!-- ════════ DATA CONFIG — edit here ════════ -->
 <script>
 const DATA = {
@@ -453,10 +438,10 @@ const DATA = {
   tagline:  "Grade 9 Student · Technology & Design Enthusiast",
   bio:      "Student based in Dubai with a keen interest in technology, graphic design, and creative problem-solving. Always learning, always building.",
   skills: [
-    { name: "Drawing",        icon: "https://raw.githubusercontent.com/nkdarkknight77-cell/Portfolio/main/drawing.png" },
-    { name: "Graphic Design", icon: "https://raw.githubusercontent.com/nkdarkknight77-cell/Portfolio/main/graphic.png" },
+    { name: "Drawing",        icon: "drawing.png" },
+    { name: "Graphic Design", icon: "graphic.png" },
     { name: "IT Skills",      icon: "it.png" }
-],
+  ],
   achievements: [
     "Certificate of Achievement in Lincoln Book of Records",
     "2nd Place in Swimming Gala Competition at Bilva Indian School",
@@ -469,7 +454,7 @@ const DATA = {
 };
 </script>
 <!-- ══════════════════════════════════════════ -->
- 
+
 <header>
   <span class="header-brand" id="hdr-name"></span>
   <nav>
@@ -480,15 +465,12 @@ const DATA = {
     <a href="#contact">Contact</a>
   </nav>
 </header>
- 
+
 <!-- ═══ HERO ═══ -->
 <section class="hero">
   <div class="hero-inner">
     <div class="hero-top">
-      <!-- Bold rectangular avatar frame -->
-      <div class="avatar-frame">
-        <img src="profile.jpg" alt="Navilan" onerror="this.style.display='none'">
-      </div>
+      <img class="avatar" src="profile.jpg" alt="Navilan" onerror="this.style.display='none'">
       <div class="hero-text">
         <div class="hero-label">Available for Projects</div>
         <h2 id="hero-name"></h2>
@@ -501,7 +483,7 @@ const DATA = {
     </div>
   </div>
 </section>
- 
+
 <!-- ═══ ABOUT ═══ -->
 <section id="about" class="reveal">
   <p class="s-label">About</p>
@@ -525,28 +507,28 @@ const DATA = {
     </div>
   </div>
 </section>
- 
+
 <!-- ═══ SKILLS ═══ -->
 <section id="skills" class="reveal">
   <p class="s-label">Skills</p>
   <p class="s-title">What I Do</p>
   <div class="skills-grid" id="skills-list"></div>
 </section>
- 
+
 <!-- ═══ ACHIEVEMENTS ═══ -->
 <section id="achievements" class="reveal">
   <p class="s-label">Achievements</p>
   <p class="s-title">What I've Accomplished</p>
   <div class="ach-list" id="ach-list"></div>
 </section>
- 
+
 <!-- ═══ CERTIFICATES ═══ -->
 <section id="certificates" class="reveal">
   <p class="s-label">Certificates</p>
   <p class="s-title">My Credentials</p>
   <div class="cert-grid" id="cert-grid"></div>
 </section>
- 
+
 <!-- ═══ CONTACT ═══ -->
 <section id="contact" class="reveal">
   <p class="s-label">Contact</p>
@@ -559,17 +541,17 @@ const DATA = {
     </a>
   </div>
 </section>
- 
+
 <footer>
   Built with care by <strong id="footer-name"></strong>
 </footer>
- 
+
 <!-- ═══ LIGHTBOX ═══ -->
 <div class="lightbox" id="lightbox">
   <button class="lightbox-close" id="lb-close">✕</button>
   <img id="lb-img" src="" alt="Certificate preview">
 </div>
- 
+
 <script>
 /* ─── Static content ──────────────────────── */
 document.getElementById("hdr-name").textContent          = DATA.name;
@@ -581,15 +563,19 @@ document.getElementById("about-section").textContent     = DATA.section;
 document.getElementById("footer-name").textContent       = DATA.name;
 document.getElementById("contact-email-text").textContent = DATA.contact;
 document.getElementById("contact-link").href             = "mailto:" + DATA.contact;
- 
+
 /* ─── Skills ──────────────────────────────── */
 DATA.skills.forEach(s => {
   const d = document.createElement("div");
   d.className = "skill-tile";
-  d.innerHTML = `<div class="skill-icon">${s.icon}</div><span class="skill-name">${s.name}</span>`;
+  const isImage = s.icon.match(/\.(png|jpg|jpeg|webp|svg|gif)/i) || s.icon.startsWith("http");
+  const iconHTML = isImage
+    ? `<img src="${s.icon}" alt="${s.name}">`
+    : s.icon;
+  d.innerHTML = `<div class="skill-icon">${iconHTML}</div><span class="skill-name">${s.name}</span>`;
   document.getElementById("skills-list").appendChild(d);
 });
- 
+
 /* ─── Achievements ────────────────────────── */
 DATA.achievements.forEach((a, i) => {
   const d = document.createElement("div");
@@ -597,7 +583,7 @@ DATA.achievements.forEach((a, i) => {
   d.innerHTML = `<div class="ach-num">${i+1}</div><p class="ach-text">${a}</p>`;
   document.getElementById("ach-list").appendChild(d);
 });
- 
+
 /* ─── Certificates ────────────────────────── */
 DATA.certificates.forEach(c => {
   const wrap = document.createElement("div");
@@ -608,7 +594,7 @@ DATA.certificates.forEach(c => {
   wrap.addEventListener("click", () => openLightbox(c.src));
   document.getElementById("cert-grid").appendChild(wrap);
 });
- 
+
 /* ─── Lightbox ────────────────────────────── */
 function openLightbox(src) {
   document.getElementById("lb-img").src = src;
@@ -624,7 +610,7 @@ document.getElementById("lightbox").addEventListener("click", function(e) {
   if (e.target === this) closeLightbox();
 });
 document.addEventListener("keydown", e => { if (e.key === "Escape") closeLightbox(); });
- 
+
 /* ─── Scroll reveal ───────────────────────── */
 const ro = new IntersectionObserver(entries => {
   entries.forEach(en => { if (en.isIntersecting) en.target.classList.add("visible"); });
