@@ -124,11 +124,12 @@ nav a:hover { color: var(--ink); background: var(--border); }
   box-shadow: 0 0 0 4px #e8f0fb, 0 12px 32px rgba(37,99,168,0.45);
 }
 .avatar-frame img {
-  width: 88px;
-  height: 88px;
+  width: 100%;
+  height: 100%;
   object-fit: cover;
-  object-position: center;
-  display: block;
+  object-position: center 10%; 
+  transform: scale(1.3);       
+  transform-origin: center 20%;
 }
 /* ──────────────────────────────────────────────────────────── */
  
