@@ -506,7 +506,7 @@ const DATA = {
   <div class="about-strip">
     <div class="about-tile">
       <div class="tile-label">School</div>
-      <div class="tile-value" style="font-size:1.5rem;letter-spacing:0.01em;line-height:1.3;padding-top:4px;">WPSD</div>
+      <div class="tile-value" style="font-size:2.0rem;letter-spacing:0.01em;line-height:1.3;padding-top:4px;">WPSD</div>
     </div>
     <div class="about-tile">
       <div class="tile-label">Grade</div>
@@ -597,13 +597,15 @@ DATA.skills.forEach(s => {
  
 /* ─── Achievements ────────────────────────── */
 DATA.achievements.forEach((a, i) => {
+  const text = typeof a === "string" ? a : a.text || "";
+  const desc = typeof a === "object" && a !== null ? a.desc : undefined;
   const d = document.createElement("div");
   d.className = "ach-item";
   d.innerHTML = `
     <div class="ach-num">${i + 1}</div>
     <div class="ach-body">
-      <p class="ach-text">${a.text}</p>
-      ${a.desc ? `<p class="ach-desc">${a.desc}</p>` : ""}
+      <p class="ach-text">${text}</p>
+      ${desc ? `<p class="ach-desc">${desc}</p>` : ""}
     </div>`;
   document.getElementById("ach-list").appendChild(d);
 });
