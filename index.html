@@ -597,16 +597,9 @@ DATA.skills.forEach(s => {
  
 /* ─── Achievements ────────────────────────── */
 DATA.achievements.forEach((a, i) => {
-  const text = typeof a === "string" ? a : a.text || "";
-  const desc = typeof a === "object" && a !== null ? a.desc : undefined;
   const d = document.createElement("div");
   d.className = "ach-item";
-  d.innerHTML = `
-    <div class="ach-num">${i + 1}</div>
-    <div class="ach-body">
-      <p class="ach-text">${text}</p>
-      ${desc ? `<p class="ach-desc">${desc}</p>` : ""}
-    </div>`;
+  d.innerHTML = `<div class="ach-num">${i+1}</div><p class="ach-text">${a}</p>`;
   document.getElementById("ach-list").appendChild(d);
 });
  
