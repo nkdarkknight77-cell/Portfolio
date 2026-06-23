@@ -310,7 +310,9 @@ section + section { padding-top: 0; }
   box-shadow: var(--shadow-sm);
   transition: box-shadow var(--transition), transform var(--transition);
 }
+.ach-item { cursor: default; }
 .ach-item:hover { box-shadow: var(--shadow-md); transform: translateX(3px); }
+.ach-body { flex: 1; }
 .ach-num {
   flex-shrink: 0;
   width: 28px; height: 28px;
@@ -327,6 +329,19 @@ section + section { padding-top: 0; }
   line-height: 1.6;
   padding-top: 3px;
 }
+.ach-desc {
+  font-size: 0.8125rem;
+  color: var(--ink-2);
+  margin-top: 8px;
+  line-height: 1.6;
+  border-left: 2px solid var(--border-md);
+  padding-left: 10px;
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  transition: max-height 0.3s ease, opacity 0.25s ease;
+}
+.ach-item:hover .ach-desc { max-height: 100px; opacity: 1; }
  
 /* ─── CERTIFICATES ───────────────────────────────────────────── */
 .cert-grid {
