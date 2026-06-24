@@ -298,40 +298,8 @@ section + section { padding-top: 0; }
 }
  
 /* ─── ACHIEVEMENTS ───────────────────────────────────────────── */
-.ach-list {
-  display: flex;
-  flex-direction: column;
-  gap: 14px;
-}
-.ach-item {
-  background: var(--surface);
-  border: 0.5px solid var(--border-md);
-  border-radius: var(--radius);
-  padding: 20px 22px;
-  display: flex;
-  align-items: flex-start;
-  gap: 16px;
-  box-shadow: var(--shadow-sm);
-  transition: box-shadow var(--transition), transform var(--transition);
-  cursor: default;
-}
-.ach-item:hover {
-  box-shadow: var(--shadow-md);
-  transform: translateX(3px);
-}
-.ach-num {
-  flex-shrink: 0;
-  width: 28px;
-  height: 28px;
-  background: var(--accent-bg);
-  color: var(--accent);
-  border-radius: 6px;
-  font-size: 0.75rem;
-  font-weight: 600;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
+.ach-item { cursor: default; }
+.ach-item.has-img { cursor: pointer; }
 .ach-body { flex: 1; }
 .ach-text { font-size: 0.9375rem; color: var(--ink); line-height: 1.6; padding-top: 3px; }
 .ach-desc {
@@ -346,17 +314,7 @@ section + section { padding-top: 0; }
   opacity: 0;
   transition: max-height 0.3s ease, opacity 0.25s ease;
 }
-.ach-desc img {
-  width: 100%;
-  max-height: 260px;
-  object-fit: contain;
-  border-radius: 10px;
-  display: block;
-  margin-top: 10px;
-}
-.ach-item:hover .ach-desc,
-.ach-item.open .ach-desc { max-height: 320px; opacity: 1; }
-.ach-item.open { transform: translateX(3px); }
+.ach-item:hover .ach-desc { max-height: 100px; opacity: 1; }
  
 /* ─── CERTIFICATES ───────────────────────────────────────────── */
 .cert-grid {
@@ -494,22 +452,18 @@ const DATA = {
     { name: "IT Skills",      icon: "it.png" }
   ],
   achievements: [
-    "Recognised in the Lincoln Book of Records for outstanding achievement",
+    { text: "Recognised in the Lincoln Book of Records for outstanding achievement", img: "records.jpg" },
     "Secured 2nd Place in the Swimming Gala Competition at Bilva Indian School",
     "Participated in the Arabic Calligraphy Competition in Grade 8 (2025–26)",
     "Earned 3rd Place in the Rubik's Cube Competition in Grade 7 (2024–25)",
     "Earned 3rd Place in the Rubik's Cube Competition in Grade 9 (2026–27)",
-    {
-      text: "Secured 2nd Place in the Inter-House Science Exhibition at the Earth Day Conference (2026)",
-      image: "Green Catalyst Award (1) (2).jpg"
-    },
-    {
-      text: "Awarded the title of 'The Green Catalyst' at the Inter-House Science Exhibition Conference (2026)",
-      image: "Green Catalyst Award.png"
-    }
+    "Secured 2nd Place in the Inter-House Science Exhibition at the Earth Day Conference (2026)",
+    "Awarded the title of 'The Green Catalyst' at the Inter-House Science Exhibition Conference (2026)"
   ],
   certificates: [
-    { src: "records.jpg", label: "Lincoln Book of Records" }
+    { src: "records.jpg", label: "Lincoln Book of Records" },
+    { src: "green-catalyst-certificate.jpg", label: "Green Catalyst Certificate" },
+    { src: "green-catalyst-award.jpg", label: "Green Catalyst Award" }
   ],
   contact: "navilan_k@woodlemdubai.ae"
 };
@@ -647,17 +601,28 @@ DATA.skills.forEach(s => {
 /* ─── Achievements ────────────────────────── */
 DATA.achievements.forEach((a, i) => {
   const text = typeof a === "string" ? a : a.text || "";
-  const image = typeof a === "object" && a !== null ? a.image : undefined;
+  const desc = typeof a === "object" && a !== null ? a.desc : undefined;
+  const img = typeof a === "object" && a !== null ? a.img : undefined;
   const d = document.createElement("div");
   d.className = "ach-item";
+  if (img) d.classList.add('has-img');
   d.innerHTML = `
     <div class="ach-num">${i + 1}</div>
     <div class="ach-body">
       <p class="ach-text">${text}</p>
-      ${image ? `<div class="ach-desc"><img src="${image}" alt="${text}"></div>` : ""}
+      ${desc ? `<p class="ach-desc">${desc}</p>` : ""}
     </div>`;
-  if (image) {
-    d.addEventListener("click", () => d.classList.toggle("open"));
+  if (img) {
+    d.addEventListener('click', () => openLightbox(img));
+    d.addEventListener('mouseenter', () => {
+      document.getElementById('lb-img').src = img;
+      document.getElementById('lightbox').classList.add('open');
+      document.body.style.overflow = 'hidden';
+    });
+    d.addEventListener('mouseleave', () => {
+      document.getElementById('lightbox').classList.remove('open');
+      document.body.style.overflow = '';
+    });
   }
   document.getElementById("ach-list").appendChild(d);
 });
@@ -672,11 +637,7 @@ DATA.certificates.forEach(c => {
   wrap.addEventListener("click", () => openLightbox(c.src));
   document.getElementById("cert-grid").appendChild(wrap);
 });
-certificates: [
-    { src: "records.jpg", label: "Lincoln Book of Records" },
-    { src: "green-catalyst-certificate.jpg", label: "Green Catalyst Certificate" },
-    { src: "green-catalyst-award.jpg", label: "Green Catalyst Award" }
-  ],
+ 
 /* ─── Lightbox ────────────────────────────── */
 function openLightbox(src) {
   document.getElementById("lb-img").src = src;
