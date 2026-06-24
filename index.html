@@ -672,7 +672,11 @@ DATA.certificates.forEach(c => {
   wrap.addEventListener("click", () => openLightbox(c.src));
   document.getElementById("cert-grid").appendChild(wrap);
 });
- 
+certificates: [
+    { src: "records.jpg", label: "Lincoln Book of Records" },
+    { src: "green-catalyst-certificate.jpg", label: "Green Catalyst Certificate" },
+    { src: "green-catalyst-award.jpg", label: "Green Catalyst Award" }
+  ],
 /* ─── Lightbox ────────────────────────────── */
 function openLightbox(src) {
   document.getElementById("lb-img").src = src;
